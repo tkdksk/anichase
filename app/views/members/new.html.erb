@@ -1,0 +1,23 @@
+<% @title = "新規登録" %>
+<h1><%= @title %></h1>
+
+<div id="generic-form">
+  <%= form_with model: @member, url: @member do |f| %>
+    <div>
+      <%= f.label :name, "アカウント名" %>
+      <%= f.text_field :name %>
+    </div>
+    <div>
+      <%= f.label :email, "メールアドレス" %>
+      <%= f.text_field :email %>
+    </div>
+    <div>
+      <%= f.label :password, "パスワード" %>
+      <%= f.password_field :password %>
+    </div>
+    <div class="buttons">
+      <%= f.submit "登録" %>
+      <%= link_to "キャンセル", :root %>
+    </div>
+  <% end %>
+</div>

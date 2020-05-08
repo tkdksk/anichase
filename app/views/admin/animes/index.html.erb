@@ -1,0 +1,37 @@
+<% @page_title = "アニメ一覧" %>
+<h1><%= @page_title %></h1>
+
+<p>新規登録</p>
+<%= form_with model: @newAnime, url: :admin_animes do |f| %>
+  <%= f.text_field :anime_title %>
+  <%= f.label "アニメ画像" %>
+  <%= f.file_field :new_anime_picture %>
+  <%= f.submit %>
+<%end%>
+
+<p>検索</p>
+<%= form_tag(:search_admin_animes,:method => 'get') do %>
+  <%= text_field_tag :search %>
+  <%= submit_tag "検索", :anime_title => nil %>
+<%end%>
+
+<% if @animes.present? %>
+<table>
+  <tr>
+    <th>アニメタイトル</th>
+    <th>削除</th>
+  </tr>
+  <% @animes.each do |anime| %>
+  <tr>
+    <td><%= anime.anime_title %></td>
+    <td>
+      <%= link_to "削除", [:admin, anime], method: :delete,
+            data: { confirm: "本当に削除しますか?" } %>
+    </td>
+  </tr>
+  <%end%>
+</table>
+<%= paginate @animes %>
+<% else %>
+<p>アニメないです。</p>
+<%end%>

@@ -1,0 +1,15 @@
+<header>
+  <span class="logo-mark"><%= link_to 'anichase', '/' %></span>
+  <%= content_tag(:span, flash.notice, class: "notice") if flash.notice %>
+  <%= content_tag(:span, flash.alert, class: "alert") if flash.alert %>
+  <% if current_member %>
+    <%= link_to "#{current_member.name}さんアカウント", :account %>
+    <%= link_to "ログアウト", :session, method: :delete %>
+    <% if current_member.administrator? %>
+      <%= link_to "管理TOP", :admin_root %>
+    <%end%>
+  <% else %>
+    <%= link_to "ログイン", :login %>
+    <%= link_to "新規登録", :new_member %>
+  <%end%>
+</header>

@@ -1,0 +1,29 @@
+<% @page_title = @anime.anime_title %>
+<h1><%= @page_title %></h1>
+
+<% if @anime.anime_picture.attached? %>
+  <%= image_tag @anime.anime_picture.variant(resize: "128x128") %>
+<%end%>
+
+<% @posts.each_with_index do |post, idx| %>
+  <p>
+    <%= idx + 1 %> <%= post.created_at.to_s(:datetime_jp) %> post_id:<%= post.id %> 
+    <% unless post.name == "" %>
+      <%= post.name %> user_id:<%= post.member_id %>
+    <%else%>
+      <%= "guest" %> user_id:xxxx
+    <%end%>
+  </p>
+  <p><%= post.body %></p>
+  <%= link_to "返信", post_path(post.id) %>
+<%end%>
+
+<h3>新規書き込み</h3>
+<%= form_with model: @newpost, url: :posts do |f| %>
+  <p>本文</p>
+  <p><%= f.text_area :body %></p>
+  <%= f.hidden_field :anime_id %>
+  <%= f.hidden_field :member_id %>
+  <%= f.hidden_field :name %>
+  <%= f.submit %>
+<%end%>

@@ -1,0 +1,23 @@
+<% @page_title = "書き込み検索" %>
+<h1><%= @page_title %></h1>
+
+<h3>検索</h3>
+<%= form_tag(:search_admin_posts,:method => 'get') do %>
+  <%= number_field_tag :search, min: 1 %>
+  <%= submit_tag "検索", :post_id => nil %>
+<%end%>
+<% if @post.present? %>
+  <p>
+    <%= @post.created_at.to_s(:datetime_jp) %>
+    <% unless @post.name == "" %>
+      <%= @post.name %> id:<%= @post.member_id %>
+    <%else%>
+      <%= "guest" %> id:xxxx
+    <%end%>
+  </p>
+  <p><%= @post.body %></p>
+  <%= link_to "削除", [:admin, @post], method: :delete,
+    data: { confirm: "本当に削除しますか?" } %>
+<%else%>
+  <p>post_idを検索してください。</p>
+<%end%>

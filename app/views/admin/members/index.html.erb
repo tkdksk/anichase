@@ -1,0 +1,30 @@
+<%  page_title = "会員一覧" %>
+<h1><%=  page_title %></h1>
+
+<%= form_tag(:search_admin_members,:method => 'get') do %>
+  <%= text_field_tag :search %>
+  <%= submit_tag "検索", :name => nil %>
+<%end%>
+
+<% if @members.present? %>
+<table>
+  <tr>
+    <th>ユーザーID</th>
+    <th>ユーザー名</th>
+    <th>削除</th>
+  </tr>
+  <% @members.each do |member| %>
+  <tr>
+    <td style="text-align: right"><%= member.id %></td>
+    <td><%= member.name %></td>
+    <td>
+      <%= link_to "削除", [:admin, member], method: :delete,
+            data: { confirm: "本当に削除しますか?" } %>
+    </td>
+  </tr>
+  <%end%>
+</table>
+<%= paginate @members %>
+<% else %>
+<p>会員情報がありません。</p>
+<%end%>

@@ -1,0 +1,15 @@
+<% @page_title = "アニメ一覧" %>
+<h1><%= @page_title %></h1>
+
+<%= form_tag(:search_animes,:method => "get") do %>
+  <%= text_field_tag :search %>
+  <%= submit_tag "search", :anime_title => nil %>
+<%end%>
+
+<ul>
+  <% @animes.each do |anime| %>
+    <li><%= link_to anime.anime_title,anime_path(anime.id) %></li>
+  <% end %>
+</ul>
+
+<%= paginate @animes %>
