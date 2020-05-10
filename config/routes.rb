@@ -11,6 +11,8 @@ Rails.application.routes.draw do
     collection { get "search" }
   end
   resources :posts
+  resources :contacts, only: [:new, :create]
+  mount LetterOpenerWeb::Engine, at: "/letter_opener" if Rails.env.development?
 
   namespace :admin do
     root "top#index"
