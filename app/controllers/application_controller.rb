@@ -1,4 +1,5 @@
 class ApplicationController < ActionController::Base
+  add_flash_types :success, :info, :warning, :danger
 
   class Forbidden < ActionController::ActionControllerError; end
   class IpAddressRejected < ActionController::ActionControllerError; end

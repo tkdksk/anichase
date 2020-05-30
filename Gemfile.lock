@@ -119,6 +119,9 @@ GEM
     kaminari-activerecord (1.2.0)
       activerecord
       kaminari-core (= 1.2.0)
+    kaminari-bootstrap (3.0.1)
+      kaminari (>= 0.13.0)
+      rails
     kaminari-core (1.2.0)
     launchy (2.5.0)
       addressable (~> 2.7)
@@ -227,6 +230,8 @@ GEM
     selenium-webdriver (3.142.7)
       childprocess (>= 0.5, < 4.0)
       rubyzip (>= 1.2.2)
+    simple_calendar (2.3.0)
+      rails (>= 3.0)
     spring (2.1.0)
     spring-watcher-listen (2.0.1)
       listen (>= 2.7, < 4.0)
@@ -286,6 +291,7 @@ DEPENDENCIES
   jbuilder (~> 2.7)
   jquery-rails
   kaminari
+  kaminari-bootstrap
   letter_opener_web
   listen (>= 3.0.5, < 3.2)
   mini_magick
@@ -297,6 +303,7 @@ DEPENDENCIES
   sass-rails (>= 6)
   sassc
   selenium-webdriver
+  simple_calendar
   spring
   spring-watcher-listen (~> 2.0.0)
   turbolinks (~> 5)

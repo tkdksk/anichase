@@ -13,6 +13,6 @@ class Admin::MembersController < Admin::Base
   def destroy
     @member = Member.find(params[:id])
     @member.destroy
-    redirect_to :admin_members, notice: "会員を削除しました。"
+    redirect_to :admin_members, success: "会員を削除しました。"
   end
 end

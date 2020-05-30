@@ -2,7 +2,7 @@
 <h1><%= @page_title %></h1>
 
 <h3>検索</h3>
-<%= form_tag(:search_admin_posts,:method => 'get') do %>
+<%= form_with(url: :search_admin_posts,:method => 'get') do %>
   <%= number_field_tag :search, min: 1 %>
   <%= submit_tag "検索", :post_id => nil %>
 <%end%>

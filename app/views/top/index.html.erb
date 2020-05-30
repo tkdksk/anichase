@@ -1,10 +1,22 @@
-<% @page_title = "anichase" %>
-<h1><%= @page_title %></h1>
-<%= link_to 'アニメ一覧', :animes %>
+<% @page_title = "top" %>
 
-<h1>jquery試し</h1>
-<p id="into-red">赤くなります！</p>
+<h3>本日放送</h3>
+<% @today_animes.each do |today| %>
+  <div class="card" style="width: 24rem;">
+    <div class="card-body">    
+      <h5 class="card-title">
+        <%= link_to today.anime.title, anime_path(today.anime_id) %>
+      </h5>
+      <p class="card-text">
+        <%= today.broadcaster %>:
+        <%= today.start_time.strftime("%k時%M分") %>より放送or配信
+      </p>
+      <%= link_to "公式サイト", "#{today.anime.official}", class: "card-text" %>
+      <% if today.anime.anime_picture.attached? %>
+      <%= image_tag today.anime.anime_picture, class: "card-img" %>
+      <%end%>
+    </div>
+  </div>
+<%end%>
 
-<script>
-  $("#into-red").css("color","red")
-</script>
+

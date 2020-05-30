@@ -1,11 +1,13 @@
 class Member < ApplicationRecord
   has_many :posts, dependent: :destroy
   has_many :animes, through: :posts
+  has_many :favorites, dependent: :destroy
+  has_many :fav_animes, through: :favorites, source: :anime
 
   include StringNormalizer
 
   before_validation do
-    self.name = normalize_as_name(name)
+    self.name = normalize_as_text(name)
     self.email = normalize_as_email(email)
   end
 

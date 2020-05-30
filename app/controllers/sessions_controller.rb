@@ -16,11 +16,9 @@ class SessionsController < ApplicationController
     end
     if Authenticator.new(member).authenticate(@form.password)
       session[:member_id] = member.id
-      flash.notice = "ログインしました。"
-      redirect_to :root
+      redirect_to :root, success: "ログインしました。"
     else
-      flash.now.alert = "メールアドレスまたはパスワードが正しくありません。"
-      render action: "new"
+      redirect_to :login, warning: "メールアドレスまたはパスワードが正しくありません。"
     end
   end
 
@@ -30,7 +28,6 @@ class SessionsController < ApplicationController
 
   def destroy
     session.delete(:member_id)
-    flash.notice = "ログアウトしました。"
-    redirect_to :root
+    redirect_to :root, success: "ログアウトしました。"
   end
 end

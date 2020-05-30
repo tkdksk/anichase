@@ -8,7 +8,6 @@ class CreateMembers < ActiveRecord::Migration[6.0]
 
       t.timestamps
     end
-    
     add_index :members, "LOWER(email)", unique: true
   end
 end

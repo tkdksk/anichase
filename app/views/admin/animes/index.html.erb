@@ -3,16 +3,25 @@
 
 <p>新規登録</p>
 <%= form_with model: @newAnime, url: :admin_animes do |f| %>
-  <%= f.text_field :anime_title %>
-  <%= f.label "アニメ画像" %>
+<p>
+  <%= f.label :title, "タイトル" %>
+  <%= f.text_field :title %>
+</p>
+<p>
+  <%= f.label :official, "公式リンク" %>
+  <%= f.text_field :official %>
+</p>
+<p>
+  <%= f.label :new_anime_picture, "アニメ画像" %>
   <%= f.file_field :new_anime_picture %>
+</p>
   <%= f.submit %>
 <%end%>
 
 <p>検索</p>
-<%= form_tag(:search_admin_animes,:method => 'get') do %>
+<%= form_with(url: :search_admin_animes,:method => 'get') do %>
   <%= text_field_tag :search %>
-  <%= submit_tag "検索", :anime_title => nil %>
+  <%= submit_tag "検索", :title => nil %>
 <%end%>
 
 <% if @animes.present? %>
@@ -23,7 +32,7 @@
   </tr>
   <% @animes.each do |anime| %>
   <tr>
-    <td><%= anime.anime_title %></td>
+    <td><%= link_to anime.title,admin_anime_path(anime.id) %></td>
     <td>
       <%= link_to "削除", [:admin, anime], method: :delete,
             data: { confirm: "本当に削除しますか?" } %>

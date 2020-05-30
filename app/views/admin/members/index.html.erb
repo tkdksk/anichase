@@ -1,7 +1,7 @@
 <%  page_title = "会員一覧" %>
 <h1><%=  page_title %></h1>
 
-<%= form_tag(:search_admin_members,:method => 'get') do %>
+<%= form_with(url: :search_admin_members,:method => 'get') do %>
   <%= text_field_tag :search %>
   <%= submit_tag "検索", :name => nil %>
 <%end%>

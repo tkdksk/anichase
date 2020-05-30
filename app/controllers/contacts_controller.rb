@@ -8,7 +8,9 @@ class ContactsController < ApplicationController
     @contact = Contact.new(contact_params)
     if @contact.save
       ContactMailer.contact_mail(@contact).deliver
-      redirect_to :root,notice: "メッセージを送信しました。"
+      redirect_to :root, success: "メッセージを送信しました。"
+    else
+      redirect_to :new_contact, warning: "情報が正しく入力されていません。"
     end
   end
 

@@ -1,31 +1,54 @@
-<% @page_title = @anime.anime_title %>
+<% @page_title = @anime.title %>
 <h1><%= @page_title %></h1>
 
-<% if @anime.anime_picture.attached? %>
-  <%= image_tag @anime.anime_picture.variant(resize: "128x128") %>
+<% if current_member %>
+  <div class="text-right">
+    <% if !Favorite.exists?(member_id: current_member.id, anime_id: @anime.id) %>
+      <%= link_to "お気に入り", anime_favorites_path(@anime), method: :post,
+        class: "btn btn-outline-danger" %>
+    <%else%>
+      <%= link_to "お気に入り解除", anime_favorites_path(@anime), method: :delete,
+        class: "btn btn-outline-primary" %>
+    <%end%>
+  </div>
 <%end%>
 
+<% if @anime.anime_picture.attached? %>
+    <%= image_tag @anime.anime_picture.variant(resize: "300x300"),
+      class: "img-responsive" %>
+<%end%>
+
+<p><%= link_to "公式サイト", "#{@anime.official}" %></p>
+
 <% @posts.each_with_index do |post, idx| %>
-  <p>
-    <%= idx + 1 %> <%= post.created_at.to_s(:datetime_jp) %> post_id:<%= post.id %> 
-    <% unless post.name == "" %>
-      <%= post.name %> user_id:<%= post.member_id %>
-    <%else%>
-      <%= "guest" %> user_id:xxxx
-    <%end%>
-  </p>
-  <p><%= post.body %></p>
-  <%= link_to "返信", post_path(post.id) %>
+  <div class="border border-secondary" style="padding:1px;">
+    <p>
+      <%= idx + 1 %> <%= post.created_at.to_s(:datetime_jp) %> post_id:<%= post.id %> 
+      <% unless post.name == "" %>
+        <%= post.name %> user_id:<%= post.member_id %>
+      <%else%>
+        guest user_id:xxxx
+      <%end%>
+    </p>
+    <p><%= post.body %></p>
+    <%= link_to "返信", post_path(post.id) %>
+  </div>
 <%end%>
 
 <h3>新規書き込み</h3>
 <%= form_with model: @newpost, url: :posts do |f| %>
-  <p>本文</p>
-  <p><%= f.text_area :body %></p>
+  <div class="form-group">
+    <%= f.label :body, "本文", class: "col-sm-12 col-form-label" %>
+    <div class="col-sm-12">
+      <%= f.text_area :body, class: "form-control" %>
+    </div>
+  </div>
   <%= f.hidden_field :anime_id %>
   <%= f.hidden_field :member_id %>
   <%= f.hidden_field :name %>
-  <%= f.submit %>
+  <div class="col-sm-12">
+    <p><%= f.submit "送信", class: "btn-success" %></p>
+  </div>
 <%end%>
-
-<%= link_to  "戻る", :animes %>
+<%= link_to "番組表", :schedules, class:"btn btn-primary" %>
+<%= link_to "アニメ一覧", :animes, class:"btn btn-primary" %>

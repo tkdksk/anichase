@@ -12,8 +12,9 @@ class AnimesController < ApplicationController
 
   def show
     @anime = Anime.find(params[:id])
-    @newpost = Post.new(:anime_id => params[:id],
+    @newpost = Post.new(anime_id: params[:id],
       member_id: current_member&.id, name: current_member&.name)
     @posts = Post.where(anime_id: params[:id])
+    @schedules = Schedule.where(anime_id: params[:id])
   end
 end

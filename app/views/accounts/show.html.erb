@@ -1,25 +1,25 @@
 <% @page_title = "#{current_member.name}さんアカウント" %>
-<h1><%= @page_title %></h1>
 
-<div class="table-wrapper">
-  <div class="links">
-    <%= link_to "アカウント情報編集", :edit_account %> |
-    <%= link_to "パスワード編集", :edit_password %>
-  </div>
+<h3>お気に入りアニメ一覧</h3>
+<% @favorites.each do |favorite| %>
+  <p><%= link_to favorite.anime.title, anime_path(favorite.anime.id) %></p>
+<%end%>
 
-  <table class="attributes">
-    <tr>
-      <th>アカウント名</th>
-      <td>
-        <%= @member.name %>
-      </td>
-    </tr>
-    <tr>
-      <th>メールアドレス</th>
-      <td class="email">
-        <%= @member.email %>
-      </td>
-    </tr>
-  </table>
-</div>
+<%= link_to "アカウント情報編集", :edit_account, class:"btn btn-primary" %>
+<%= link_to "パスワード編集", :edit_password, class:"btn btn-primary" %>
+
+<table class="table">
+  <tr>
+    <th>アカウント名</th>
+    <td>
+      <%= @member.name %>
+    </td>
+  </tr>
+  <tr>
+    <th>メールアドレス</th>
+    <td class="email">
+      <%= @member.email %>
+    </td>
+  </tr>
+</table>
 

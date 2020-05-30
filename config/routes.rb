@@ -7,10 +7,13 @@ Rails.application.routes.draw do
   resource :password, only: [:show, :edit, :update]
 
   resources :members
-  resources :animes do
+  resources :animes, shallow: true do
+    resource :favorites, only: [:create, :destroy]
+    get :favorites, on: :collection
     collection { get "search" }
   end
   resources :posts
+  resources :schedules
   resources :contacts, only: [:new, :create]
   mount LetterOpenerWeb::Engine, at: "/letter_opener" if Rails.env.development?
 
@@ -25,5 +28,6 @@ Rails.application.routes.draw do
     resources :posts do
       collection { get "search" }
     end
+    resources :schedules
   end
 end

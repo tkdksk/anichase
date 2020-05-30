@@ -13,11 +13,9 @@ class PasswordsController < ApplicationController
     @change_password_form = ChangePasswordForm.new(member_params)
     @change_password_form.object = current_member
     if @change_password_form.save
-      flash.notice = "パスワードを変更しました。"
-     redirect_to :account
+      redirect_to :account, success: "パスワードを変更しました。"
     else
-      flash.now.alert = "入力に誤りがあります。"
-      render action: "edit"
+      redirect_to :edit_password, warning: "入力に誤りがあります。"
     end
   end
   

@@ -7,11 +7,9 @@ class MembersController < ApplicationController
     @member = Member.new(member_params)
     if @member.save
       session[:member_id] = @member.id
-      flash.notice = "新規登録しました。"
-      redirect_to :root
+      redirect_to :root, success: "新規登録しました。"
     else
-      flash.now.alert = "情報が正しく入力されていません。"
-      render action: "new"
+      redirect_to :new_member, warning: "情報が正しく入力されていません。"
     end
   end
 

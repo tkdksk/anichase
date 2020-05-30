@@ -1,0 +1,31 @@
+<% @page_title = "#{@anime.title}放送日" %>
+
+<h3>放送日追加</h3>
+<%= form_with model: @new_schedule, url: :admin_schedules do |f| %>
+  <p>放送日時</p>
+  <p><%= f.datetime_field :start_time %></p>
+  <p>放送局</p>
+  <p><%= f.text_area :broadcaster %></p>
+  <%= f.hidden_field :anime_id %>
+  <%= f.submit %>
+<%end%>
+
+<table>
+  <tr>
+    <th>放送日時</th>
+    <th>放送局</th>
+    <th>削除</th>
+  </tr>
+  <% @schedules.each do |schedule| %>
+  <tr>
+    <td><%= schedule.start_time.to_s(:datetime_jp) %></td>
+    <td><%= schedule.broadcaster %></td>
+    <td>
+      <%= link_to "削除", [:admin, schedule], method: :delete,
+            data: { confirm: "本当に削除しますか?" } %>
+    </td>
+  </tr>
+  <%end%>
+</table>
+
+<%= link_to  "戻る", :admin_animes %>

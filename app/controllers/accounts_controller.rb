@@ -3,6 +3,7 @@ class AccountsController < ApplicationController
   
   def show
     @member = current_member
+    @favorites = Favorite.where(member_id: current_member.id)
   end
 
   def edit
@@ -13,10 +14,10 @@ class AccountsController < ApplicationController
     @member = current_member
     @member.assign_attributes(member_params)
     if @member.save
-      flash.notice = "アカウント情報を更新しました。"
-      redirect_to :account
+      flash.notice = 
+      redirect_to :account, success: "アカウント情報を更新しました。"
     else
-      render action: "edit"
+      redirect_to :edit_account, warning: "情報が正しく入力されていません。"
     end
   end
 

@@ -1,0 +1,11 @@
+<%= week_calendar events: @schedules do |date, schedules| %> 
+  <%= date.strftime("%-m月%-d日") %>
+
+  <% schedules.each do |schedule| %>
+    <div class="border-bottom" style="padding:1px;">
+      <p><%= schedule.broadcaster %></p>
+      <p><%= schedule.start_time.strftime("%k時%M分") %></p>
+      <p><%= link_to schedule.anime.title, anime_path(schedule.anime_id) %></p>
+    </div>
+  <% end %>
+<% end %>

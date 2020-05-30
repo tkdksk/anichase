@@ -1,34 +1,44 @@
 <% @page_title = "返信" %>
-<p>
-  <%= @post.created_at.to_s(:datetime_jp) %>
-  <% unless @post.name == "" %>
-    <%= @post.name %> id:<%= @post.member_id %>
-  <%else%>
-      <%= "guest" %> id:xxxx
-  <%end%>
-</p>
-<p><%= @post.body %></p>
+  <div class="border border-secondary text-danger" style="padding:1px;">
+    <p>
+      <%= @post.created_at.to_s(:datetime_jp) %> post_id:<%= @post.id %>
+      <% unless @post.name == "" %>
+        <%= @post.name %> id:<%= @post.member_id %>
+      <%else%>
+        guest user_id:xxxx
+      <%end%>
+    </p>
+    <p><%= @post.body %></p>
+  </div>
 
 <% @posts.each_with_index do |post, idx| %>
-  <p> 
-    <%= idx + 1 %> <%= post.created_at.to_s(:datetime_jp) %> post_id:<%= post.id %>
-    <% unless post.name == "" %>
-      <%= post.name %> user_id:<%= @post.member_id %>
-    <%else%>
-      <%= "guest" %> user_id:xxxx
-    <%end%>
-  </p>
-  <p><%= post.body %></p>
+  <div class="border border-secondary" style="padding:1px;">
+    <p>
+      <%= idx + 1 %> <%= post.created_at.to_s(:datetime_jp) %> post_id:<%= post.id %>
+      <% unless post.name == "" %>
+        <%= post.name %> user_id:<%= @post.member_id %>
+      <%else%>
+        guest user_id:xxxx
+      <%end%>
+    </p>
+    <p><%= post.body %></p>
+  </div>
 <%end%>
-
-<%= link_to "戻る", anime_path(@post.anime_id) %>
 
 <h3>返信する</h3>
 <%= form_with model: @newpost, url: :posts do |f| %>
-  <p>本文</p>
-  <p><%= f.text_area :body %></p>
+  <div class="form-group">
+    <%= f.label :body, "本文", class: "col-sm-12 col-form-label" %>
+    <div class="col-sm-12">
+      <%= f.text_area :body, class: "form-control" %>
+    </div>
+  </div>
   <%= f.hidden_field :reply_id %>
   <%= f.hidden_field :member_id %>
   <%= f.hidden_field :name %>
-  <%= f.submit %>
+  <div class="col-sm-12">
+    <p><%= f.submit "送信", class: "btn-success" %></p>
+  </div>
 <%end%>
+
+<%= link_to "戻る", anime_path(@post.anime_id) %>

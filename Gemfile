@@ -23,6 +23,7 @@ gem 'jbuilder', '~> 2.7'
 gem 'bcrypt'
 gem "rails-i18n"
 gem "kaminari"
+gem "kaminari-bootstrap"
 gem "date_validator"
 gem "valid_email2"
 
@@ -30,6 +31,7 @@ gem 'sassc'
 gem 'uglifier'
 gem 'jquery-rails'
 gem 'bootstrap-honoka-rails'
+gem 'simple_calendar'
 
 # Use Active Storage variant
 gem 'image_processing', '~> 1.2'

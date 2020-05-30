@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_08_033840) do
+ActiveRecord::Schema.define(version: 2020_05_20_001547) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -37,17 +37,28 @@ ActiveRecord::Schema.define(version: 2020_05_08_033840) do
   end
 
   create_table "animes", force: :cascade do |t|
-    t.string "anime_title"
+    t.string "title", null: false
+    t.string "official"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "contacts", force: :cascade do |t|
-    t.string "name"
-    t.string "email"
-    t.text "content"
+    t.string "name", null: false
+    t.string "email", null: false
+    t.text "content", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "favorites", force: :cascade do |t|
+    t.bigint "member_id", null: false
+    t.bigint "anime_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["anime_id"], name: "index_favorites_on_anime_id"
+    t.index ["member_id", "anime_id"], name: "index_favorites_on_member_id_and_anime_id", unique: true
+    t.index ["member_id"], name: "index_favorites_on_member_id"
   end
 
   create_table "members", force: :cascade do |t|
@@ -72,7 +83,17 @@ ActiveRecord::Schema.define(version: 2020_05_08_033840) do
     t.index ["member_id"], name: "index_posts_on_member_id"
   end
 
+  create_table "schedules", force: :cascade do |t|
+    t.datetime "start_time", null: false
+    t.bigint "anime_id"
+    t.string "broadcaster", null: false
+    t.index ["anime_id"], name: "index_schedules_on_anime_id"
+  end
+
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "favorites", "animes"
+  add_foreign_key "favorites", "members"
   add_foreign_key "posts", "animes"
   add_foreign_key "posts", "members"
+  add_foreign_key "schedules", "animes"
 end
