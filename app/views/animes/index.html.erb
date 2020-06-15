@@ -1,13 +1,8 @@
 <% @page_title = "アニメ一覧" %>
 
 <%= form_with(url: :search_animes,:method => "get") do %>
-  <div class="col-sm-12">
-    <p>
-      <%= text_field :search, class: "form-control" %>
-      <%= submit_tag "検索", :title => nil,
-        class: "btn btn-warning btn-sm" %>
-    </p>
-  </div>
+  <%= text_field_tag :search %>
+  <%= submit_tag "検索", :title => nil %>
 <%end%>
 
 <ul class="list-group list-group-flush" style="max-width: 400px;">
