@@ -11,7 +11,7 @@ Rails.application.configure do
   config.assets.compile = true
   config.assets.js_compressor = :uglifier
 
-  config.active_storage.service = :local
+  config.active_storage.service = :amazon
 
   config.log_level = :debug
 
