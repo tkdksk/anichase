@@ -6,6 +6,8 @@
   <p><%= f.datetime_field :start_time %></p>
   <p>放送局</p>
   <p><%= f.text_area :broadcaster %></p>
+  <p>放送回数</p>
+  <p><%= f.number_field :number_of_broadcasts %></p>
   <%= f.hidden_field :anime_id %>
   <%= f.submit %>
 <%end%>

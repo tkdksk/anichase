@@ -87,6 +87,7 @@ ActiveRecord::Schema.define(version: 2020_05_20_001547) do
     t.datetime "start_time", null: false
     t.bigint "anime_id"
     t.string "broadcaster", null: false
+    t.integer "number_of_broadcasts"
     t.index ["anime_id"], name: "index_schedules_on_anime_id"
   end
 

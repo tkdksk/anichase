@@ -4,6 +4,7 @@ class CreateSchedules < ActiveRecord::Migration[6.0]
       t.datetime :start_time, null: false
       t.references :anime, foreign_key: true
       t.string :broadcaster, null: false
+      t.integer :number_of_broadcasts
     end
   end
 end
