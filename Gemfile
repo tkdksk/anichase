@@ -32,6 +32,7 @@ gem 'uglifier'
 gem 'jquery-rails'
 gem 'bootstrap-honoka-rails'
 gem 'simple_calendar'
+gem "chronic"
 
 gem 'image_processing', '~> 1.2'
 gem "mini_magick"
