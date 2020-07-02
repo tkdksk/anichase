@@ -16,7 +16,7 @@
     <p>
       <%= idx + 1 %> <%= post.created_at.to_s(:datetime_jp) %> post_id:<%= post.id %>
       <% unless post.name == "" %>
-        <%= post.name %> user_id:<%= @post.member_id %>
+        <%= post.name %> user_id:<%= post.member_id %>
       <%else%>
         guest user_id:xxxx
       <%end%>
