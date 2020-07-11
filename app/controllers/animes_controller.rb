@@ -16,5 +16,6 @@ class AnimesController < ApplicationController
       member_id: current_member&.id, name: current_member&.name)
     @posts = Post.where(anime_id: params[:id])
     @schedules = Schedule.where(anime_id: params[:id])
+    @reply = Post.pluck(:reply_id)
   end
 end

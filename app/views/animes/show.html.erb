@@ -31,7 +31,7 @@
       <%end%>
     </p>
     <p><%= post.body %></p>
-    <%= link_to "返信", post_path(post.id) %>
+    <%= link_to "返信#{@reply.count(post.id)}", post_path(post.id) %>
   </div>
 <%end%>
 
