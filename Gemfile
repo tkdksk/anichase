@@ -34,7 +34,7 @@ gem 'bootstrap-honoka-rails'
 gem 'simple_calendar'
 gem "chronic"
 
-gem 'image_processing', '~> 1.2'
+gem 'image_processing', '~> 1.12'
 gem "mini_magick"
 gem "aws-sdk-s3", require: false
 
